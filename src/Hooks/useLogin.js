@@ -1,14 +1,19 @@
+import { useRef, useState } from "react";
 
-export  function useLogin() {
-
+export  function useUserState() {
 
     const login = (email, password) => {
-        // Fake login check
-        if (email === "admin" && password === "1234") {        
-            return true;
-        }
-            return false;
+
+        return email === "admin" && password === "1234";{        
+            
+        return true;
+    }
+      return false;
     };
 
-    return { login  };
+    const logout = () => {
+      setUser(null)
+    }
+
+    return {login};
 }

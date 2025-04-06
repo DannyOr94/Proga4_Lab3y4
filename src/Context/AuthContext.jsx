@@ -1,19 +1,19 @@
-
-
-// 1. Create a new context
-import { createContext } from 'react'
-import { useState } from 'react'
+import { createContext, useState } from "react"
+import { useLogin } from "../Hooks/useLogin"
 
 export const AuthContext = createContext()
 
-// 2. Create a Provider para compartir el estado del usuario
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null)
+  const { login } = useLogin()
 
-    const [user, setUser] = useState(null)
+  const logout = () => {
+    setUser(null)
+  }
 
-    return (
-        <AuthContext.Provider value={{user, setUser}}>
-            {children}
-        </AuthContext.Provider>
-    )
+  return (
+    <AuthContext.Provider value={{ user, setUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }

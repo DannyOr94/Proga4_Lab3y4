@@ -1,55 +1,20 @@
-import './App.css';
-import { useRef, useState } from 'react';
-import Home from './Components/Home';
-import AnonymousUserComponent from './Components/AnonymousUserComponents';
+import  Login  from './Components/Login'
+import './App.css'
+import Home from './Components/Home'
+import { useLogin } from './Hooks/useLogin'
+import { AuthContext, AuthProvidert } from './Context/AuthContext'
+import { useContext } from 'react'
 
 function App() {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const [error, setError] = useState('');
-  const [user, setUser] = useState(null);
 
-  const login = (email, password) => {
-    return email === 'admin' && password === '1234';
-  };
-
-  const handleLogin = () => {
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const isSuccess = login(email, password);
-
-    if (!isSuccess) {
-      setError('Credenciales incorrectas');
-    } else {
-      setUser({ email });
-    }
-  };
-
+  const {user} = useContext(AuthContext);
+  
   return (
-    <>
-      <h2>Login</h2>
-      {!user ? (
-        <div>
-          <input type="email" 
-          placeholder="Correo" 
-          ref={emailRef}
-           />
-          <br />
-          <input type="password" 
-          placeholder="Contraseña" 
-          ref={passwordRef} 
-          />
-          <br />
-          <button onClick={handleLogin}>Ingresar</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </div>
-      ) : 
-
-      (
-        <Home email={user.email} />
-      )}
+<>
+    {user ? <Home userName={user}/> : <Login/> }
+    
     </>
-  );
-}
-
+      )
+  }
+ 
 export default App;

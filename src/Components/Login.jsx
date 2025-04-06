@@ -1,22 +1,16 @@
-
-import { useState, useRef  } from 'react'
-import { useLogin } from '../Hooks/useLogin'
+import {useState, useRef} from 'react'
+import {useLogin}  from '../Hooks/useLogin'
 import { AuthContext } from '../Context/AuthContext'
 import { useContext } from 'react'
 
 export default function Login() {
 
-    // 3. Consumir el contexto
-    const { setUser } = useContext(AuthContext)
-    
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const [error, setError] = useState('')
-    
+    const {setUser} = useContext(AuthContext)
     
     const { login } = useLogin()
-    
-   
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const [error, setError] = useState('');
 
     const handleLogin = () => {
         const email = emailRef.current.value;
@@ -27,17 +21,15 @@ export default function Login() {
             setError("Credenciales incorrectas");
         }
         else
-        {
-            alert("Bienvenido" + email)    
-            setUser(email)        
+        {  
+            alert("Bienvenido " + email)
+            setUser(email)
         }
     }
 
-
-    return (
-        <>        
-              <h2>Login</h2>                      
-              <div>
+    return (       
+        <>
+                <h2>Login</h2>
                 <input 
                 type="email"
                 placeholder='Correo'
@@ -52,7 +44,6 @@ export default function Login() {
                 <br/>
                 <button onClick={handleLogin}>Ingresar</button>
                 { error && <p style={{ color: "red" }}>{error}</p> }
-              </div>                     
-        </>
+        </>         
     )
 }
