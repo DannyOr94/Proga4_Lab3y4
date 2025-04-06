@@ -30,14 +30,22 @@ function App() {
       <h2>Login</h2>
       {!user ? (
         <div>
-          <input type="email" placeholder="Correo" ref={emailRef} />
+          <input type="email" 
+          placeholder="Correo" 
+          ref={emailRef}
+           />
           <br />
-          <input type="password" placeholder="Contraseña" ref={passwordRef} />
+          <input type="password" 
+          placeholder="Contraseña" 
+          ref={passwordRef} 
+          />
           <br />
           <button onClick={handleLogin}>Ingresar</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
-      ) : (
+      ) : 
+
+      (
         <Home email={user.email} />
       )}
     </>
